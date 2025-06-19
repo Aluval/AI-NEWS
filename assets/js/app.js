@@ -5,21 +5,12 @@ async function fetchNews() {
   const data = await res.json();
   const news = data.results || [];
 
-  const categoryCounts = {};
-  const keywordCounts = {};
   const container = document.getElementById("news-container");
   container.innerHTML = "";
 
   news.slice(0, 10).forEach(article => {
     const title = article.title || "";
     const desc = article.description || "";
-    const category = article.category || "general";
-    const words = (title + " " + desc).toLowerCase().split(/\W+/);
-
-    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-    words.forEach(word => {
-      if (word.length > 4) keywordCounts[word] = (keywordCounts[word] || 0) + 1;
-    });
 
     container.innerHTML += `
       <div class="card">
@@ -27,24 +18,6 @@ async function fetchNews() {
         <p>${desc}</p>
       </div>
     `;
-  });
-
-  drawChart("categoryChart", Object.keys(categoryCounts), Object.values(categoryCounts), "News by Category");
-  const topKeywords = Object.entries(keywordCounts).sort((a,b) => b[1]-a[1]).slice(0, 10);
-  drawChart("keywordChart", topKeywords.map(k => k[0]), topKeywords.map(k => k[1]), "Top Keywords");
-}
-
-function drawChart(id, labels, data, label) {
-  new Chart(document.getElementById(id), {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: data,
-        backgroundColor: '#28a745'
-      }]
-    }
   });
 }
 
