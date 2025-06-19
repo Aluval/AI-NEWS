@@ -1,24 +1,21 @@
-const NEWS_API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b"; // Replace this
-
+const NEWS_API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b";
 const lang = document.documentElement.lang || "en";
 
 function getCategory() {
-  if (window.location.href.includes("intl")) return "general";
-  return "general";
+  if (window.location.href.includes("intl")) return "world";
+  return "top";
 }
 
 async function fetchNews() {
   const category = getCategory();
-  const country = "in";
-  const url = `https://newsapi.org/v2/top-headlines?country=${country}&language=${lang}&category=${category}&apiKey=${NEWS_API_KEY}`;
-
+  const url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&country=in&language=${lang}&category=${category}`;
   const container = document.getElementById("news-container");
   container.innerHTML = lang === "te" ? "వార్తలు లోడ్ అవుతున్నాయి..." : "Loading news...";
 
   try {
     const res = await fetch(url);
     const data = await res.json();
-    const news = data.articles || [];
+    const news = data.results || [];
 
     container.innerHTML = "";
     news.slice(0, 10).forEach(article => {
@@ -30,9 +27,7 @@ async function fetchNews() {
       `;
     });
   } catch (err) {
-    container.innerHTML = lang === "te"
-      ? "వార్తలను పొందలేకపోయాం."
-      : "Error fetching news.";
+    container.innerHTML = lang === "te" ? "వార్తలను పొందలేకపోయాం." : "Error fetching news.";
   }
 }
 
