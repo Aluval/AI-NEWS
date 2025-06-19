@@ -1,0 +1,6 @@
+flask
+requests
+transformers
+torch
+apscheduler
+textblob
