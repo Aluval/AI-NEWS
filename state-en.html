@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indian States News</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="sidebar">
+  <h2>🇮🇳 States</h2>
+  <ul>
+    <li><a href="index-en.html">Home</a></li>
+    <li><a href="intl-en.html">International</a></li>
+    <li><a href="state-te.html">🌐 తెలుగు</a></li>
+  </ul>
+</div>
+
+<div class="main">
+  <h1>🗺️ State News</h1>
+  <div id="news-container"></div>
+  <footer>© 2025 by Harsha</footer>
+</div>
+
+<script>
+  const API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b";
+  async function fetchNews() {
+    const res = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=in&language=en&category=top`);
+    const data = await res.json();
+    const news = data.results || [];
+    const container = document.getElementById("news-container");
+    container.innerHTML = "";
+    news.filter(n => n.country === 'India').slice(0, 10).forEach(article => {
+      container.innerHTML += `<div class="card"><h3>${article.title}</h3><p>${article.description}</p></div>`;
+    });
+  }
+  fetchNews();
+</script>
+</body>
+</html>
