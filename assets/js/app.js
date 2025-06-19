@@ -1,0 +1,59 @@
+const API_KEY = "pub_309e141687284e298187739350cd3671";
+
+async function fetchNews() {
+  const res = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=in&language=en&category=top`);
+  const data = await res.json();
+  const news = data.results || [];
+
+  const categoryCounts = {};
+  const keywordCounts = {};
+  const container = document.getElementById("news-container");
+  container.innerHTML = "";
+
+  news.slice(0, 10).forEach(article => {
+    const title = article.title || "";
+    const desc = article.description || "";
+    const category = article.category || "general";
+    const words = (title + " " + desc).toLowerCase().split(/\W+/);
+
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+    words.forEach(word => {
+      if (word.length > 4) keywordCounts[word] = (keywordCounts[word] || 0) + 1;
+    });
+
+    container.innerHTML += `
+      <div class="card">
+        <h3>${title}</h3>
+        <p>${desc}</p>
+      </div>
+    `;
+  });
+
+  drawChart("categoryChart", Object.keys(categoryCounts), Object.values(categoryCounts), "News by Category");
+  const topKeywords = Object.entries(keywordCounts).sort((a,b) => b[1]-a[1]).slice(0, 10);
+  drawChart("keywordChart", topKeywords.map(k => k[0]), topKeywords.map(k => k[1]), "Top Keywords");
+}
+
+function drawChart(id, labels, data, label) {
+  new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: data,
+        backgroundColor: '#28a745'
+      }]
+    }
+  });
+}
+
+fetchNews();
+document.getElementById('lang-select').addEventListener('change', e => {
+  const lang = e.target.value;
+  fetch(`assets/lang/${lang}.json`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("title").innerText = data.title;
+    });
+});
