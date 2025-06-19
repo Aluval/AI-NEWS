@@ -1,4 +1,4 @@
-const NEWS_API_KEY = "pub_309e141687284e298187739350cd3671"; // Your working NewsData.io key
+const NEWS_API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b";
 const lang = document.documentElement.lang || "en";
 
 function getCategory() {
@@ -9,7 +9,6 @@ function getCategory() {
 async function fetchNews() {
   const category = getCategory();
   const url = `https://newsdata.io/api/1/news?apikey=${NEWS_API_KEY}&country=in&language=${lang}&category=${category}`;
-
   const container = document.getElementById("news-container");
   container.innerHTML = lang === "te" ? "వార్తలు లోడ్ అవుతున్నాయి..." : "Loading news...";
 
@@ -22,15 +21,13 @@ async function fetchNews() {
     news.slice(0, 10).forEach(article => {
       container.innerHTML += `
         <div class="card">
-          <h3>${article.title || "Untitled"}</h3>
-          <p>${article.description ?? "No description available."}</p>
+          <h3>${article.title}</h3>
+          <p>${article.description}</p>
         </div>
       `;
     });
   } catch (err) {
-    container.innerHTML = lang === "te"
-      ? "వార్తలను పొందలేకపోయాం."
-      : "Error fetching news.";
+    container.innerHTML = lang === "te" ? "వార్తలను పొందలేకపోయాం." : "Error fetching news.";
   }
 }
 
