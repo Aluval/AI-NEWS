@@ -1,4 +1,4 @@
-const NEWS_API_KEY = "YOUR_NEWSAPI_KEY_HERE"; // Replace this
+const NEWS_API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b"; // Replace this
 
 const lang = document.documentElement.lang || "en";
 
