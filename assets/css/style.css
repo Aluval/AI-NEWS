@@ -4,7 +4,6 @@ body {
   display: flex;
   background: #f4f4f4;
 }
-
 .sidebar {
   width: 220px;
   background: #333;
@@ -13,36 +12,25 @@ body {
   height: 100vh;
   position: fixed;
 }
-
 .sidebar h2 {
   margin-top: 0;
 }
-
 .sidebar ul {
   list-style-type: none;
   padding: 0;
 }
-
 .sidebar ul li {
   margin: 15px 0;
 }
-
 .sidebar ul li a {
   color: #fff;
   text-decoration: none;
 }
-
-.sidebar select {
-  margin-top: 20px;
-  width: 100%;
-}
-
 .main {
   margin-left: 240px;
   padding: 20px;
   width: calc(100% - 240px);
 }
-
 button {
   margin: 10px 0;
   padding: 10px;
@@ -51,7 +39,6 @@ button {
   color: #fff;
   cursor: pointer;
 }
-
 .card {
   background: white;
   padding: 15px;
@@ -60,7 +47,6 @@ button {
   border-left: 5px solid #007BFF;
   max-width: 700px;
 }
-
 footer {
   margin-top: 40px;
   text-align: center;
