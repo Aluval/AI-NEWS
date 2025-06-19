@@ -1,4 +1,3 @@
-// Chart for Indian states
 new Chart(document.getElementById('stateChart'), {
   type: 'bar',
   data: {
@@ -12,7 +11,6 @@ new Chart(document.getElementById('stateChart'), {
   options: { responsive: true }
 });
 
-// Chart for global countries
 new Chart(document.getElementById('countryChart'), {
   type: 'bar',
   data: {
