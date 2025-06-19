@@ -1,4 +1,4 @@
-const NEWS_API_KEY = "pub_309e141687284e298187739350cd3671"; // Your NewsData.io key
+const NEWS_API_KEY = "pub_309e141687284e298187739350cd3671"; // Your working NewsData.io key
 const lang = document.documentElement.lang || "en";
 
 function getCategory() {
