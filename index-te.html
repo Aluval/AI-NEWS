@@ -13,42 +13,16 @@
       <li><a href="state-te.html">భారత రాష్ట్రాలు</a></li>
       <li><a href="intl-te.html">అంతర్జాతీయ</a></li>
       <li><a href="index-en.html">🌐 English</a></li>
+      <li><a href="analysis.html">📊 విశ్లేషణ</a></li>
+      <li><a href="impact.html">🤖 ఎంఎల్ ప్రభావం</a></li>
     </ul>
   </div>
-
   <div class="main">
-    <h1 id="title">📰 కృత్రిమ మేధస్సు వార్తలు</h1>
+    <h1>📰 కృత్రిమ మేధస్సు వార్తలు</h1>
     <button onclick="fetchNews()">🔄 రీఫ్రెష్</button>
-    <h2>తాజా వార్తలు</h2>
     <div id="news-container"></div>
     <footer>© 2025 హర్షా</footer>
   </div>
-
-  <script>
-    const API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b";
-
-    async function fetchNews() {
-      const res = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&country=in&language=te&category=top`);
-      const data = await res.json();
-      const news = data.results || [];
-
-      const container = document.getElementById("news-container");
-      container.innerHTML = "";
-
-      news.slice(0, 10).forEach(article => {
-        const title = article.title || "";
-        const desc = article.description || "";
-
-        container.innerHTML += `
-          <div class="card">
-            <h3>${title}</h3>
-            <p>${desc}</p>
-          </div>
-        `;
-      });
-    }
-
-    fetchNews();
-  </script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
