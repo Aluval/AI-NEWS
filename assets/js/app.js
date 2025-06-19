@@ -1,4 +1,4 @@
-const NEWS_API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b";
+const NEWS_API_KEY = "pub_309e141687284e298187739350cd3671";
 const lang = document.documentElement.lang || "en";
 
 function getCategory() {
