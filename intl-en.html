@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>International News</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="sidebar">
+  <h2>🌍 International</h2>
+  <ul>
+    <li><a href="index-en.html">Home</a></li>
+    <li><a href="state-en.html">Indian States</a></li>
+    <li><a href="intl-te.html">🌐 తెలుగు</a></li>
+  </ul>
+</div>
+
+<div class="main">
+  <h1>🌐 Global News</h1>
+  <div id="news-container"></div>
+  <footer>© 2025 by Harsha</footer>
+</div>
+
+<script>
+  const API_KEY = "9eaa5de8147b45bd8f6face0fbbebf2b";
+  async function fetchNews() {
+    const res = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY}&language=en&category=world`);
+    const data = await res.json();
+    const news = data.results || [];
+    const container = document.getElementById("news-container");
+    container.innerHTML = "";
+    news.slice(0, 10).forEach(article => {
+      container.innerHTML += `<div class="card"><h3>${article.title}</h3><p>${article.description}</p></div>`;
+    });
+  }
+  fetchNews();
+</script>
+</body>
+</html>
